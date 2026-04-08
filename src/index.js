@@ -31,7 +31,7 @@ module.exports = function toReadable(number) {
   const ties = [
     'twenty',
     'thirty',
-    'fourty',
+    'forty',
     'fifty',
     'sixty',
     'seventy',
@@ -42,7 +42,13 @@ module.exports = function toReadable(number) {
     value =
       number % 10 === 0
         ? ties[number / 10 - 2]
-        : `${ties[Math.floor(number / 10) - 2]} ${ties[number % 10]}`;
+        : `${ties[Math.floor(number / 10) - 2]} ${nums[number % 10]}`;
+  }
+  if (number >= 100 && number < 1000) {
+    value =
+      number % 100 === 0
+        ? `${nums[number / 100]} hundred`
+        : `${nums[Math.floor(number / 100)]} hundred ${toReadable(number - Math.floor(number / 100) * 100)}`;
   }
   return value;
 };
